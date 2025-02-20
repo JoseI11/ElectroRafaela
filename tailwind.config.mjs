@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -7,6 +8,9 @@ export default {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        fondo:"url('/assets/imagenconstelacion.jpg')",
+      },    
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
