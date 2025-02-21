@@ -1,11 +1,11 @@
 "use client";
 
 import React from 'react'
-
+import 'firebase/firestore';
 const Disyuntores = () => {
+
   return (
-    
-    <div>Disyuntores</div>
+      <main></main>
   )
 }
 
