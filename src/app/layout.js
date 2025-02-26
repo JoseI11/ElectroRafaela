@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
+import Image from "next/image";
+import logo from "../../public/logo.png";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -20,8 +21,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-fondo`}
       >
+        {/* Logo */}
+        <div className="top-0 flex justify-center items-center h-28 w-full">
+          <Image alt="logo" src={logo} height={100} priority />
+        </div>
         {children}
       </body>
     </html>
