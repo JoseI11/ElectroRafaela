@@ -3,14 +3,15 @@ import { initializeApp } from "firebase/app";
 import {getDatabase} from "firebase/database"
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBCOygkazO48V-L0GhNVRRU_lO6OnrinsA",
-  authDomain: "electrorafaela-6353d.firebaseapp.com",
-  databaseURL: "https://electrorafaela-6353d-default-rtdb.firebaseio.com",
-  projectId: "electrorafaela-6353d",
-  storageBucket: "electrorafaela-6353d.firebasestorage.app",
-  messagingSenderId: "380225517519",
-  appId: "1:380225517519:web:3524a888304708864584ba",
-  measurementId: "G-M5DLDMB5V9"
+
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env. NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
 const app = initializeApp(firebaseConfig);

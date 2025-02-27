@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-fondo`}
       >
         {/* Logo */}
-        <div className="top-0 flex justify-center items-center h-28 w-full">
+        <div className="relative top-0 flex justify-center items-center h-28 w-full">
           <Image alt="logo" src={logo} height={100} priority />
         </div>
         {children}

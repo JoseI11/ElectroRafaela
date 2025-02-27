@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useParams, useSearchParams } from "next/navigation"; // Para capturar parámetros dinámicos
 import useProducts from "../../hooks/useProducts"; // Ajusta la ruta según tu estructura
-import Image from "next/image";
+import Image from "next/legacy/image";
 import WhatsappButton from "../../components/whatsappbutton";
 import FilterCheck from "@/app/components/filtercheck";
 const CategoriaPage = () => {
@@ -28,8 +28,9 @@ const CategoriaPage = () => {
         <input
           type="search"
           onChange={(e) => setSearchText(e.target.value)}
-          className="w-32 h-8 space-x-2 sm:w-44 md:w-48 placeholder:text-sm pl-2"
-          placeholder="Buscar por nombre o codigo"
+          className="w-32 h-8 space-x-2 sm:w-44 md:w-48 placeholder:text-xs placeholder:sm:text-sm pl-2"
+          placeholder="Buscar"
+          title="Buscar por nombre o codigo"
         ></input>
         {categoria === "TERMICAS"?
         
@@ -50,6 +51,7 @@ const CategoriaPage = () => {
                 width={200}
                 height={200}
                 layout="intrinsic"
+                priority
               />
             </a>
             <div className="px-5 pb-5">
