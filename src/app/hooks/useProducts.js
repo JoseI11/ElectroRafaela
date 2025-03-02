@@ -27,7 +27,7 @@ const useProducts = ({ categoria, limite = 12, searchText,polos }) => {
         productosRef,
         orderByChild("Categoría"),
         equalTo(categoria),
-        // limitToFirst(limite)
+        //limitToFirst(limite)
       );
       try {
         const snapshot = await get(consulta);

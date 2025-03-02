@@ -2,27 +2,29 @@
 import React, { useState } from "react";
 import { useParams, useSearchParams } from "next/navigation"; // Para capturar parámetros dinámicos
 import useProducts from "../../hooks/useProducts"; // Ajusta la ruta según tu estructura
-import Image from "next/legacy/image";
-import WhatsappButton from "../../components/whatsappbutton";
 import FilterCheck from "@/app/components/filtercheck";
+import Loader from "@/app/components/loader";
+import RenderProducts from "@/app/components/renderproducts";
+import PaginateProducts from "@/app/components/paginateproducts";
 const CategoriaPage = () => {
   const [searchText, setSearchText] = useState("");
-  const { categoria } = useParams();
+  let { categoria } = useParams();
+  categoria=categoria.toUpperCase();
   const searchParams = useSearchParams();
+  const [currentPage, setCurrentPage] = useState(1); // Página actual
+  const itemsPerPage = 12; // Número de productos por página
   const polos = searchParams.get("polos")?.split(",") || [];  
   const { productos, loading } = useProducts({ categoria, searchText, polos });
+  
   if (loading) {
-    return (
-      <div className="w-full h-screen flex justify-center items-center">
-        <div className="flex gap-x-2">
-          <div className="w-5 h-5 bg-[#d991c2] rounded-full animate-bounce"></div>
-          <div className="w-5 h-5 bg-[#9869b8] rounded-full animate-bounce [animation-delay:0.2s]"></div>
-          <div className="w-5 h-5 bg-[#6756cc] rounded-full animate-bounce [animation-delay:0.4s]"></div>
-        </div>
-      </div>
-    );
+    <Loader />;
   }
+  const totalPages = Math.ceil(productos.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentProductos = productos.slice(startIndex, endIndex);
   return (
+    
     <section className="grid grid-cols-[auto,1fr] gap-4 pl-1 pr-1">
       <div className="w-32 sm:w-44 md:w-48">
         <input
@@ -37,48 +39,8 @@ const CategoriaPage = () => {
         <FilterCheck />: null}
         
       </div>
-      <div className="flex flex-col sm:grid sm:grid-cols-2 md:grid md:grid-cols-3 lg:grid lg:grid-cols-4 gap-4">
-        {productos.map((producto) => (
-          <div
-            className=" flex w-full items-center  bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 sm:flex-col sm:w-40 md:flex-col md:w-44"
-            key={producto.id}
-          >
-            <a href="#" className="flex justify-center">
-              <Image
-                className="w-full h-28 object-cover rounded-t-lg"
-                src={producto.Image}
-                alt={producto.Categoría}
-                width={200}
-                height={200}
-                layout="intrinsic"
-                priority
-              />
-            </a>
-            <div className="px-5 pb-5">
-              <a
-                href="#"
-                className="flex justify-center items-center w-full text-center"
-              >
-                <h5
-                  className="text-xs font-semibold tracking-tight p-0 text-gray-900 dark:text-white sm:text-sm line-clamp-2"
-                  title={producto.Nombre}
-                >
-                  {producto.Nombre}
-                </h5>
-              </a>
-              <div className="flex items-center justify-center mt-2.5 mb-5">
-                <p className="text-xs text-gray-900 dark:text-white sm:text-sm">
-                  Código:
-                </p>
-                <p className="text-xs font-semibold text-gray-900 dark:text-white sm:text-sm">
-                  {producto.Código}
-                </p>
-              </div>
-              <WhatsappButton />
-            </div>
-          </div>
-        ))}
-      </div>
+     <RenderProducts productos={currentProductos} />
+      <PaginateProducts totalPages={totalPages} setCurrentPage={setCurrentPage} currentPage={currentPage}/>
     </section>
   );
 };
