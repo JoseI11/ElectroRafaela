@@ -1,7 +1,13 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 
 const PaginateProducts = ({currentPage, setCurrentPage, totalPages}) => {
+    // useEffect(() => {
+    //   setCurrentPage(1); // Reiniciar paginación al cambiar los productos
+    // }, [products]);
   return (
+
+  
+  
     <div className="flex justify-center mt-6">
     <button
       className={`px-4 py-2 mx-2 rounded ${
@@ -15,7 +21,7 @@ const PaginateProducts = ({currentPage, setCurrentPage, totalPages}) => {
 
     <span className="px-4 py-2 border rounded">{currentPage} / {totalPages}</span>
 
-    <button
+    <button 
       className={`px-4 py-2 mx-2 rounded ${
         currentPage === totalPages ? "bg-gray-300 cursor-not-allowed" : "bg-blue-500 text-white"
       }`}

@@ -10,11 +10,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "css-loader": "^7.1.2",
     "firebase": "^11.3.1",
+    "flowbite": "^3.1.2",
     "flowbite-react": "^0.10.2",
     "next": "15.1.7",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "style-loader": "^4.0.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

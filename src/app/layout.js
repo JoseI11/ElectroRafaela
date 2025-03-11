@@ -1,8 +1,11 @@
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import "./styles/globals.css";
 import Image from "next/image";
 import logo from "../../public/logo.png";
 import ScrollToTop from "./components/scrollToTop";
+import { initFlowbite } from "flowbite";
+import FlowbiteProvider from "./components/flowbiteprovider";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -28,8 +31,9 @@ export default function RootLayout({ children }) {
         <div className="relative top-0 flex justify-center items-center h-28 w-full">
           <Image alt="logo" src={logo} height={100} priority />
         </div>
-       <ScrollToTop></ScrollToTop> 
-        {children}
+        <ScrollToTop></ScrollToTop>
+
+        <FlowbiteProvider>{children}</FlowbiteProvider>
       </body>
     </html>
   );

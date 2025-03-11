@@ -1,57 +1,36 @@
-import { useState, useEffect } from "react";
-import {
-  equalTo,
-  get,
-  limitToFirst,
-  orderByChild,
-  query,
-  ref,
-} from "firebase/database";
-import { db } from "../firebase-config"; // Asegúrate de importar `database`
-const useProducts = ({ categoria, limite = 12, searchText,polos }) => {
+import { useState, useEffect, useRef } from "react";
+import { equalTo, get, orderByChild, query, ref } from "firebase/database";
+import { db } from "../firebase-config";
+
+const useProducts = ({ category }) => {
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const prevCategoriaRef = useRef(null); // Usa useRef en lugar de useState
+ 
   useEffect(() => {
+    // Si la categoria es igual a la anterior, no realizar nada
+    if (!category || prevCategoriaRef.current === category) return;
+
     const fetchProducts = async () => {
-      console.log(categoria)
-      
-   
-      if (!categoria) {
-        console.error("Error: 'categoria' es undefined");
-        setLoading(false);
-        return;
-      }
+      setLoading(true);
+      setProductos([]); // Limpia los productos antes de la nueva carga
+
       const productosRef = ref(db, "productos");
-      const consulta = query(
-        productosRef,
-        orderByChild("Categoría"),
-        equalTo(categoria),
-        //limitToFirst(limite)
-      );
+      const consulta = query(productosRef, orderByChild("Categoría"), equalTo(category));
+
       try {
         const snapshot = await get(consulta);
+        console.log("Datos obtenidos de Firebase:", snapshot.val()); // Para depuración
+
         if (snapshot.exists()) {
-          let productosArray = Object.entries(snapshot.val()).map(
-            ([id, data]) => ({
-              id,
-              ...data,
-            })
-          );
-          if (polos?.length > 0) {
-            productosArray = productosArray.filter((producto) =>
-              polos.includes(producto.Polo)
-            );
-          }
-          if (searchText) {
-            productosArray = productosArray.filter((producto) =>
-              producto.Nombre.toLowerCase().includes(searchText.toLowerCase())||
-              producto.Código.toLowerCase().includes(searchText.toLowerCase())
-            );
-          }
-          setProductos(productosArray); // Evita insertar duplicados
+          const productosArray = Object.entries(snapshot.val()).map(([id, data]) => ({
+            id,
+            ...data,
+          }));
+          setProductos(productosArray);
         } else {
-          console.log("No se encontraron productos");
+          console.warn("No se encontraron productos para la categoría:", category);
+          setProductos([]); // Se mantiene como un array vacío
         }
       } catch (error) {
         console.error("Error al obtener los productos:", error);
@@ -59,8 +38,10 @@ const useProducts = ({ categoria, limite = 12, searchText,polos }) => {
         setLoading(false);
       }
     };
+
+    prevCategoriaRef.current = category; // Actualiza el valor de referencia después de la consulta
     fetchProducts();
-  }, [categoria, limite, searchText,polos]);
+  }, [category]); // La dependencia es solo la categoria
 
   return { productos, loading };
 };

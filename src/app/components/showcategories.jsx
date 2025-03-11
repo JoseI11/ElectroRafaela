@@ -7,28 +7,28 @@ export const MuestraProductos = () => {
   const imagenesIconos = [
     {
       src: "/assets/contactor.png",
-      url: "/productos/CONTACTORES",
+      url: "/products/CONTACTORES",
       text: "CONTACTORES",
     },
     {
       src: "/assets/guardamotor.png",
-      url: "/productos/GUARDAMOTORES",
+      url: "/products/GUARDAMOTORES",
       text: "GUARDAMOTORES",
     },
     {
       src: "/assets/interruptor-compacto.png",
-      url: "/productos/INTERRUPTORES_COMPACTOS",
+      url: "/products/INTERRUPTORES_COMPACTOS",
       text: "INT. COMPACTOS",
     },
     {
       src: "/assets/disyuntor.png",
-      url: "/productos/DISYUNTORES",
+      url: "/products/DISYUNTORES",
       text: "DISYUNTORES",
     },
 
     {
       src: "/assets/termica.png",
-      url: "/productos/TERMICAS",
+      url: "/products/TERMICAS",
       text: "TERMICAS",
     },
   ];
@@ -41,6 +41,7 @@ export const MuestraProductos = () => {
          
             className="bg-slate-300 rounded-full flex flex-col justify-center items-center w-48 h-48 m-4"
           >
+          {console.log(imagen.url)}
             <Link
               href={imagen.url}
               className="transition-transform transform hover:scale-105"
