@@ -60,7 +60,7 @@ const CategoriaPage = () => {
           <input
             type="search"
             onChange={(e) => setSearchText(e.target.value)}
-            className="w-32 h-8 space-x-2 sm:w-44 md:w-48 placeholder:text-xs placeholder:sm:text-sm pl-2"
+            className="w-32 h-8 space-x-2 text-sm sm:w-44 sm:text-base md:w-48 placeholder:text-xs placeholder:sm:text-sm pl-2"
             placeholder="Buscar"
             title="Buscar por nombre o código"
           />

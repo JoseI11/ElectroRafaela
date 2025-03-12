@@ -41,7 +41,7 @@ export const MuestraProductos = () => {
          
             className="bg-slate-300 rounded-full flex flex-col justify-center items-center w-48 h-48 m-4"
           >
-          {console.log(imagen.url)}
+         
             <Link
               href={imagen.url}
               className="transition-transform transform hover:scale-105"

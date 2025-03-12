@@ -53,13 +53,6 @@ const FilterCheck = ({ currentProductos = [] }) => {
             key={polo.id}
             className="flex items-center justify-between w-full"
           >
-            {/* <label
-              htmlFor={polo.name}
-              className="text-xs sm:text-sm md:text-base"
-            >
-              {polo.name}
-            </label> */}
-
             <div className="flex max-w-md flex-col gap-4" id="checkbox">
               <div className="flex items-center gap-2">
                 <Checkbox id={polo.id} name={polo.name} value={polo.name} className="w-4 h-4 border-zinc-900" onChange={handleFilterChange}  />
@@ -67,11 +60,7 @@ const FilterCheck = ({ currentProductos = [] }) => {
                   {polo.name}
                 </Label>
               </div>
-           
-          
-             
             </div>
-
             {/* <Checkbox>
               <Checkbox.
                 id={polo.id}
