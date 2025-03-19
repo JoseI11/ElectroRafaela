@@ -2,6 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useRouter, useParams, useSearchParams } from "next/navigation";
 import { Checkbox,Label } from "flowbite-react";
 
+/**
+ * Componente que renderiza un grupo de checkboxes para filtrar productos por el tipo de polo. Para termicas se muestran las siguientes opciones como checkboxes (UNIPOLAR, BIPOLAR, TRIPOLAR, TETRAPOLAR) y para los disyuntores se muestran las siguientes opciones como checkboxes (BIPOLAR, TETRAPOLAR). 
+ * según la categoría actual.
+ *
+ * @returns {React.ReactElement} Un elemento JSX que contiene un grupo de checkboxes.
+ 
+*/
 const FilterCheck = () => {
   const router = useRouter();
   let { category } = useParams();

@@ -8,6 +8,14 @@ import { Button } from "flowbite-react";
 import ModalAccesories from "@/app/components/modal";
 import Loader from "@/app/components/loader";
 
+/**
+ * Pagina de un producto.
+ *
+ * Muestra la informacion detallada de un producto, incluyendo su imagen, nombre, codigo, descripcion y enlaces para descargar
+ * la ficha y el catalogo. Ademas, muestra una lista de accesorios compatibles con el producto. El rutado de esta pagina es dinamico, /products/[category]/product/[ID]
+ *
+ * @returns {JSX.Element} Un JSXElement que contiene la informacion del producto.
+ */
 const ProductPage = () => {
   const { ID, category } = useParams();
 

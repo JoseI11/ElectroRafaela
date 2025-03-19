@@ -1,5 +1,10 @@
 import React from 'react'
 
+/**
+ * Pagina para mostrar un mensaje de "en desarrollo" para una funcionalidad no disponible actualmente.
+ *
+ * @returns {JSX.Element} Un JSXElement con el mensaje de "en desarrollo"
+ */
 export default function ComingSoon() {
   return (
     <div className="flex items-center justify-center h-screen bg-gray-100">

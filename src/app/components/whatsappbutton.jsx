@@ -1,5 +1,10 @@
 import React from 'react'
 
+/**
+ * Componente para mostrar un botón que al realizar clic sobre el, abre una ventana de WhatsApp para contactar a la empresa con un mensaje predeterminado.
+ *
+ * @returns Un JSXElement con un botón que abre una ventana de WhatsApp
+ */
 const WhatsappButton = () => {
    const phoneNumber = "5493492581182"; // Reemplaza con tu número real
     const message = encodeURIComponent("Hola, quiero más información"); // Mensaje codificado

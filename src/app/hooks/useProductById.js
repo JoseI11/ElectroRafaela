@@ -2,6 +2,12 @@ import React, { useEffect, useState } from "react";
 import { ref, query, orderByChild, equalTo, get } from "firebase/database";
 import { db } from "../firebase-config";
 
+/**
+ * Hook para reaizar un filtrado de un producto por su ID.
+ *
+ * @param {{ id: string }} props - Un objeto con una propiedad "id" que contiene el ID del producto.
+ * @returns {{ product: [], loading: boolean }} - Un objeto con dos propiedades: "product", que es un array con el producto solicitado, y "loading", que es un booleano que indica si se est  cargando el producto.
+ */
 const useProductById = ({ id }) => {
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(true);

@@ -2,6 +2,17 @@ import React from "react";
 import Image from "next/legacy/image";
 import Link from "next/link";
 import WhatsappButton from "../components/whatsappbutton";
+/**
+ * Realiza el renderizado de una lista de productos segun la categoria seleccionada previamente.
+ 
+ *
+ * @param {Array} productos - An array of product objects. Each object should
+ * contain the properties 'id', 'Image', 'Categoría', 'Nombre', and 'Código'.
+ *
+ * @returns {JSX.Element} A JSX component rendering a responsive grid of products,
+ * each with an image, product name, product code, and a Whatsapp button.
+ */
+
 const RenderProducts = ({ productos }) => {
   return (
     <div className="flex flex-col sm:grid sm:grid-cols-2 md:grid md:grid-cols-3 lg:grid lg:grid-cols-4 gap-4">

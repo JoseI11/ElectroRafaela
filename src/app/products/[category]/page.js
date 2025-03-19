@@ -21,6 +21,15 @@ const FilterCheck = dynamic(() => import("@/app/components/filtercheck"), {
   ssr: false,
 });
 
+/**
+ * Componente que renderiza los productos de una categoria determinada en una pagina.
+ * 
+ * @returns {JSX.Element} Un JSXElement que contiene:
+ *   - Un formulario de busqueda,
+ *   - Un componente de filtrado de polos (si se trata de termicas o disyuntores),
+ *   - Un componente de renderizado de productos,
+ *   - Un componente de paginacion.
+ */
 const CategoriaPage = () => {
   const [searchText, setSearchText] = useState("");
   let { category } = useParams();

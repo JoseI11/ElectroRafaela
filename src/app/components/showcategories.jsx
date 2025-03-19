@@ -3,6 +3,15 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/legacy/image";
 
+/**
+ * MuestraProductos es un componente que renderiza una serie de iconos 
+ * representando diferentes categorías de productos. Cada icono actúa como 
+ * un enlace hacia una página específica de productos. 
+ * 
+ * @returns {JSX.Element} Un elemento JSX que contiene un conjunto de iconos 
+ * en un contenedor flexible, cada uno enlazado a una categoría de productos.
+ */
+
 export const MuestraProductos = () => {
   const imagenesIconos = [
     {

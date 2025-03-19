@@ -1,3 +1,6 @@
+/**
+ * Configuración de Firebase Realtime Database para la aplicación Next.js
+ */
 import { initializeApp } from "firebase/app";
 
 import {getDatabase} from "firebase/database"

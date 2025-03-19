@@ -1,6 +1,14 @@
 import React, { useState } from "react";
 import { Modal, Button } from "flowbite-react";
 import Image from "next/image";
+/**
+ * Componente que muestra una ventana modal con los accesorios compatibles
+ * con un producto. Esta funcionalidad funciona pero esta desactivada debido a que aun faltan productos por cargar.
+ * @param {number} quantity - La cantidad de accesorios compatibles
+ * @param {object} product - El objeto del producto que tiene la informaci n
+ * de los accesorios compatibles
+ * @returns {JSX.Element} El componente ModalAccesories
+ */
 const ModalAccesories = ({ quantity, product }) => {
   const [openModal, setOpenModal] = useState(false);
   return (

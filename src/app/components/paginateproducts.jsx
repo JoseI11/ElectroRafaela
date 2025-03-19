@@ -1,6 +1,14 @@
 "use client";
 import React, { useEffect   } from 'react'
 
+/**
+ * Componente para paginar productos. Se encarga de cambiar de pagina para no mostrar la totalidad de los productos de cada categoria. Ademas se le agrego un useEffect para que al cambiar de pagina siempre vuele al inicio de la pagina.
+ * 
+ * @param {number} currentPage Numero de pagina actual
+ * @param {function} setCurrentPage Funcion para cambiar la pagina actual
+ * @param {number} totalPages N mero total de paginas
+ * @returns Un JSXElement con botones para cambiar deap gina
+ */
 const PaginateProducts = ({currentPage, setCurrentPage, totalPages}) => {
   useEffect(() => {
     window.scrollTo({top: 0, behavior: 'smooth'});

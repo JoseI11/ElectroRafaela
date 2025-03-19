@@ -1,5 +1,11 @@
 import React from "react";
 import { Accordion } from "flowbite-react";
+/**
+ * MyAccordion component
+ * @param {React.ReactNode} children The content of the accordion
+ * @param {string} title The title of the accordion
+ * @returns {React.ReactElement} The accordion component
+ */
 const MyAccordion = ({children,title}) => {
   return (
     <div>
