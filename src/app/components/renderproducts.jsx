@@ -21,7 +21,7 @@ const RenderProducts = ({ productos }) => {
           className=" flex w-full items-center  bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 sm:flex-col sm:w-40 md:flex-col md:w-44"
           key={producto.id}
         >
-          <Link href={"/coming-soon"}>
+          {/* <Link href={"/coming-soon"}>
             <Image
               className="w-full h-28 object-cover rounded-t-lg"
               src={producto.Image}
@@ -31,8 +31,8 @@ const RenderProducts = ({ productos }) => {
               layout="intrinsic"
               loading="lazy"
             />
-          </Link>
-          {/* <Link
+          </Link> */}
+          <Link
             href={`/products/${encodeURIComponent(
               producto.Categoría
             )}/product/${producto.ID}`}
@@ -48,10 +48,10 @@ const RenderProducts = ({ productos }) => {
 
               loading="lazy"
             />
-          </Link> */}
+          </Link>
           <div className="px-5 pb-5">
             <a
-              href="#"
+              href={null}
               className="flex justify-center items-center w-full text-center"
             >
               <h5

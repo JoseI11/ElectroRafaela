@@ -35,6 +35,7 @@ const ProductPage = () => {
   return (
     <section>
       <div className="flex justify-center space-x-20 ">
+        {console.log(product.Image)}
         <Image
           src={product.Image}
           priority
@@ -54,7 +55,7 @@ const ProductPage = () => {
         </div>
       </div>
       <section className="grid grid-cols-2 pt-3 ">
-        <section className="flex justify-center items-center flex-col border-2">
+        {/* <section className="flex justify-center items-center flex-col border-2">
           <h2>Informacion adicional del producto</h2>
           <div className="flex items-center space-x-6">
             <Button href={product.Ficha} className="bg-red-400">
@@ -64,9 +65,9 @@ const ProductPage = () => {
               Descargar catalogo
             </Button>
           </div>
-        </section>
+        </section> */}
         
-        <section className="flex justify-center items-center flex-col border-2">
+        {/* <section className="flex justify-center items-center flex-col border-2">
           <h2>Este producto es compatible con los siguientes accesorios:</h2>
           <div className="flex items-center justify-center"></div>
           <ModalAccesories
@@ -74,7 +75,7 @@ const ProductPage = () => {
             product={product}
             
           />
-        </section>
+        </section> */}
       </section>
     </section>
   );
