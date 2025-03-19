@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 import Link from "next/link";
 import Image from "next/legacy/image";
@@ -16,11 +15,11 @@ export const MuestraProductos = () => {
       url: "/products/GUARDAMOTORES",
       text: "GUARDAMOTORES",
     },
-    {
-      src: "/assets/interruptor-compacto.png",
-      url: "/products/INTERRUPTORES_COMPACTOS",
-      text: "INT. COMPACTOS",
-    },
+    // {
+    //   src: "/assets/interruptor-compacto.png",
+    //   url: "/products/INTERRUPTORES_COMPACTOS",
+    //   text: "INT. COMPACTOS",
+    // },
     {
       src: "/assets/disyuntor.png",
       url: "/products/DISYUNTORES",
@@ -32,7 +31,6 @@ export const MuestraProductos = () => {
       text: "TERMICAS",
     },
   ];
-
   return (
     <section className="flex flex-row flex-wrap justify-center items-center">
       {imagenesIconos.map((imagen, index) => (
@@ -48,7 +46,6 @@ export const MuestraProductos = () => {
                   height={128}
                   className="object-contain"
                   priority
-                  
                 />
               </div>
             </Link>
