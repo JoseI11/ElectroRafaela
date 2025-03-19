@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter, useParams, useSearchParams } from "next/navigation";
 import { Checkbox,Label } from "flowbite-react";
 
-const FilterCheck = ({ currentProductos = [] }) => {
+const FilterCheck = () => {
   const router = useRouter();
   let { category } = useParams();
   category = category.toUpperCase(); // Asegurar consistencia
@@ -30,7 +30,7 @@ const FilterCheck = ({ currentProductos = [] }) => {
       : category === "DISYUNTORES"
       ? polosDisy
       : [];
-  console.log(polos);
+
   const handleFilterChange = (e) => {
     const { value, checked } = e.target;
     const updatedFilters = checked
@@ -41,7 +41,7 @@ const FilterCheck = ({ currentProductos = [] }) => {
 
     const queryString =
       updatedFilters.length > 0 ? `?polos=${updatedFilters.join(",")}` : "";
-    console.log(queryString);
+
     router.push(`/products/${category}${queryString}`);
   };
 
@@ -61,27 +61,7 @@ const FilterCheck = ({ currentProductos = [] }) => {
                 </Label>
               </div>
             </div>
-            {/* <Checkbox>
-              <Checkbox.
-                id={polo.id}
-                name={polo.name}
-                value={polo.name}
-                className="w-4 h-4 bg-title"
-                onChange={handleFilterChange}
-                checked={selectedPolos.includes(polo.name)}
-              />
-             
-            </Checkbox> */}
 
-            {/* <input
-              type="checkbox"
-              id={polo.id}
-              name={polo.name}
-              value={polo.name}
-              className="w-4 h-4 bg-title"
-              onChange={handleFilterChange}
-              checked={selectedPolos.includes(polo.name)}
-            /> */}
           </div>
         ))}
       </div>

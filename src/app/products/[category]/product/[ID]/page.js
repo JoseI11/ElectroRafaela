@@ -6,16 +6,17 @@ import Image from "next/image";
 import WhatsappButton from "@/app/components/whatsappbutton";
 import { Button } from "flowbite-react";
 import ModalAccesories from "@/app/components/modal";
+import Loader from "@/app/components/loader";
 
 const ProductPage = () => {
   const { ID, category } = useParams();
-  console.log(ID); // Obtener el ID desde la URL
+
   const { productos, loading } = useProducts({ category }); // Obtienes todos los productos
 
   if (loading) {
-    return <p>Cargando...</p>;
+    return <Loader />;
   }
-  console.log(productos);
+
   // Filtrar productos por ID
   const product = productos.find((producto) => producto.ID === Number(ID));
 
@@ -35,7 +36,7 @@ const ProductPage = () => {
         />
         <div className="pt-7">
           <h1 className="font-custom text-sm sm:text-base md:text-2xl">
-            {product.Descripción.toUpperCase()} {product.Nombre}
+            {product?.Descripción.toUpperCase()} {product?.Nombre}
           </h1>
 
           <p className="text-gray-900 font-custom text-sm">{product.Código}</p>
@@ -56,11 +57,14 @@ const ProductPage = () => {
             </Button>
           </div>
         </section>
+        
         <section className="flex justify-center items-center flex-col border-2">
           <h2>Este producto es compatible con los siguientes accesorios:</h2>
+          <div className="flex items-center justify-center"></div>
           <ModalAccesories
-            quantity={product.Accesorios_compatibles.length}
+            quantity={product?.Accesorios_compatibles.length}
             product={product}
+            
           />
         </section>
       </section>

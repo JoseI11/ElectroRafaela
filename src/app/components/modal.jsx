@@ -11,14 +11,15 @@ const ModalAccesories = ({ quantity, product }) => {
       <Modal
         show={openModal}
         onClose={() => setOpenModal(false)}
-        className="bg-gray-500 "
+        className="bg-gray-950 bg-opacity-30 flex justify-center items-center"
       >
+    
         <Modal.Header className="text-sm h-14 pr-3 flex items-center  bg-red-600 sm:text-base md:text-xl font-sans ">
           <span className="text-white pl-4 ">
             Este producto es compatible con los siguientes accesorios:
           </span>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body >
           <div className="space-y-6">
             {product.Accesorios_compatibles.map((accesorio, index) => (
               <div key={index} className="flex items-center space-x-4">
@@ -38,7 +39,6 @@ const ModalAccesories = ({ quantity, product }) => {
             ))}
           </div>
         </Modal.Body>
-        <Modal.Footer></Modal.Footer>
       </Modal>
     </>
   );

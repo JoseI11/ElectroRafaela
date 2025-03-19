@@ -13,7 +13,7 @@ const useProductById = ({ id }) => {
       setLoading(true);
       setProduct([]);
 
-      console.log("ID recibido:", id);
+   
       const productosRef = ref(db, "productos");
 
       // Realiza la consulta a Firebase con el ID

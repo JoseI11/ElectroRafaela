@@ -1,13 +1,25 @@
 "use client";
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import { useParams, useSearchParams } from "next/navigation";
+import dynamic from "next/dynamic";
 import useProducts from "@/app/hooks/useProducts";
-import FilterCheck from "@/app/components/filtercheck";
-import Loader from "@/app/components/loader";
-import RenderProducts from "@/app/components/renderproducts";
 import useFilterProducts from "@/app/hooks/useFilterProducts";
+import Loader from "@/app/components/loader";
 import PaginateProducts from "@/app/components/paginateproducts";
 import MyAccordion from "@/app/components/accordion";
+import { FaFilter } from "react-icons/fa";
+import Image from "next/image";
+import Script from "next/script";
+
+// Lazy load components
+const RenderProducts = dynamic(() => import("@/app/components/renderproducts"), {
+  loading: () => <Loader />,
+  ssr: false,
+});
+
+const FilterCheck = dynamic(() => import("@/app/components/filtercheck"), {
+  ssr: false,
+});
 
 const CategoriaPage = () => {
   const [searchText, setSearchText] = useState("");
@@ -15,66 +27,71 @@ const CategoriaPage = () => {
   category = category.toUpperCase();
   const searchParams = useSearchParams();
 
-  const polos = useMemo(
-    () => searchParams.get("polos")?.split(",") || [],
-    [searchParams]
-  );
+  const polos = useMemo(() => searchParams.get("polos")?.split(",") || [], [searchParams]);
   const { productos, loading } = useProducts({ category });
 
   const filteredProductos = useFilterProducts({ productos, searchText, polos });
-
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
-
-  // Usamos useRef para evitar el reset de la página cuando cambiamos la paginación
   const isPaginationChange = useRef(false);
 
-  // Total de páginas basado en los productos filtrados
   const totalPages = Math.ceil(filteredProductos.length / itemsPerPage);
 
-  // Resetear a la primera página cuando searchText o polos cambien
   useEffect(() => {
     if (!isPaginationChange.current) {
       setCurrentPage(1);
     }
-    isPaginationChange.current = false; // Resetear la referencia después de resetear la página
+    isPaginationChange.current = false;
   }, [searchText, polos, category]);
 
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentProducts = filteredProductos.slice(startIndex, endIndex);
+  const startIndex = useMemo(() => (currentPage - 1) * itemsPerPage, [currentPage, itemsPerPage]);
+  const endIndex = useMemo(() => startIndex + itemsPerPage, [startIndex, itemsPerPage]);
+  const currentProducts = useMemo(() => filteredProductos.slice(startIndex, endIndex), [filteredProductos, startIndex, endIndex]);
 
   if (loading) {
     return <Loader />;
   }
 
   const handlePageChange = (page) => {
-    setCurrentPage(page); // Primero cambiamos la página
-    isPaginationChange.current = true; // Luego marcamos que fue un cambio manual
+    setCurrentPage(page);
+    isPaginationChange.current = true;
   };
 
   return (
     <div className="w-full">
+      <Script
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+        strategy="lazyOnload"
+      />
+      <Script
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossOrigin="true"
+        strategy="lazyOnload"
+      />
       <section className="grid grid-cols-[auto,1fr] gap-4 pl-1 pr-1">
         <div className="w-32 space-y-3 sm:w-44 md:w-48">
-          <input
-            type="search"
-            onChange={(e) => setSearchText(e.target.value)}
-            className="w-32 h-8 space-x-2 text-sm sm:w-44 sm:text-base md:w-48 placeholder:text-xs placeholder:sm:text-sm pl-2"
-            placeholder="Buscar"
-            title="Buscar por nombre o código"
-          />
+          <div className="relative">
+            <FaFilter className="absolute left-2 top-2.5 text-gray-500" />
+            <input
+              type="search"
+              onChange={(e) => setSearchText(e.target.value)}
+              className="w-32 h-8 pl-8 text-sm sm:w-44 sm:text-base md:w-48 placeholder:text-xs placeholder:sm:text-sm"
+              placeholder="Buscar"
+              title="Buscar por nombre o código"
+            />
+          </div>
 
           {(category === "TERMICAS" || category === "DISYUNTORES") && (
-            <MyAccordion title={"Tipos de polos"}>
+            <MyAccordion title="Tipos de polos">
               <FilterCheck productos={currentProducts} />
             </MyAccordion>
           )}
         </div>
-        <RenderProducts productos={currentProducts} />
+        <RenderProducts productos={currentProducts} lazy={true} />
       </section>
       <div className="flex flex-col justify-center items-center">
-        
         <PaginateProducts
           totalPages={totalPages}
           setCurrentPage={handlePageChange}

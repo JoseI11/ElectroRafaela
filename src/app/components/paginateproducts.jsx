@@ -1,6 +1,11 @@
-import React from 'react'
+"use client";
+import React, { useEffect   } from 'react'
 
 const PaginateProducts = ({currentPage, setCurrentPage, totalPages}) => {
+  useEffect(() => {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  } , [currentPage]);
+
   return (
     <div className="flex justify-center mt-6">
     <button
