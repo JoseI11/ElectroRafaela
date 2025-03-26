@@ -15,7 +15,7 @@ const PaginateProducts = ({currentPage, setCurrentPage, totalPages}) => {
   } , [currentPage]);
 
   return (
-    <div className="flex justify-center mt-6">
+    <div className="flex justify-center mt-2 mb-5">
     <button
       className={`px-4 py-2 mx-2 rounded ${
         currentPage === 1 ? "bg-gray-300 cursor-not-allowed" : "bg-blue-500 text-white"

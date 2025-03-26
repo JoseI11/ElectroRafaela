@@ -1,23 +1,23 @@
 "use client";
 import React, { useState, useEffect, useRef, useMemo } from "react";
-import { useParams, useSearchParams } from "next/navigation";
+import {useRouter,usePathname, useParams, useSearchParams } from "next/navigation";
 import dynamic from "next/dynamic";
 import useProducts from "@/app/hooks/useProducts";
 import useFilterProducts from "@/app/hooks/useFilterProducts";
 import Loader from "@/app/components/loader";
-import PaginateProducts from "@/app/components/paginateproducts";
+import PaginateProducts from "@/app/components/paginate-products";
 import MyAccordion from "@/app/components/accordion";
 import { FaFilter } from "react-icons/fa";
-import Image from "next/image";
+
 import Script from "next/script";
 
 // Lazy load components
-const RenderProducts = dynamic(() => import("@/app/components/renderproducts"), {
+const RenderProducts = dynamic(() => import("@/app/components/render-products"), {
   loading: () => <Loader />,
   ssr: false,
 });
 
-const FilterCheck = dynamic(() => import("@/app/components/filtercheck"), {
+const FilterCheck = dynamic(() => import("@/app/components/filter-check"), {
   ssr: false,
 });
 
@@ -38,20 +38,26 @@ const CategoriaPage = () => {
 
   const polos = useMemo(() => searchParams.get("polos")?.split(",") || [], [searchParams]);
   const { productos, loading } = useProducts({ category });
-
+  const router = useRouter()
   const filteredProductos = useFilterProducts({ productos, searchText, polos });
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 8;
+  const itemsPerPage = 6;
   const isPaginationChange = useRef(false);
-
+  const pathname = usePathname();
+  useEffect(() => {
+    const pageFromUrl = searchParams.get("page");
+    if (pageFromUrl) {
+      setCurrentPage(parseInt(pageFromUrl, 10));
+    }
+  }, [searchParams]);
   const totalPages = Math.ceil(filteredProductos.length / itemsPerPage);
 
-  useEffect(() => {
-    if (!isPaginationChange.current) {
-      setCurrentPage(1);
-    }
-    isPaginationChange.current = false;
-  }, [searchText, polos, category]);
+  // useEffect(() => {
+  //   if (!isPaginationChange.current) {
+  //     setCurrentPage(1);
+  //   }
+  //   isPaginationChange.current = false;
+  // }, [searchText, polos, category]);
 
   const startIndex = useMemo(() => (currentPage - 1) * itemsPerPage, [currentPage, itemsPerPage]);
   const endIndex = useMemo(() => startIndex + itemsPerPage, [startIndex, itemsPerPage]);
@@ -61,11 +67,22 @@ const CategoriaPage = () => {
     return <Loader />;
   }
 
+  // const handlePageChange = (page) => {
+  //   setCurrentPage(page);
+  //   isPaginationChange.current = true;
+  // };
   const handlePageChange = (page) => {
+    if (page < 1 || page > totalPages) return;
+
     setCurrentPage(page);
     isPaginationChange.current = true;
-  };
 
+    const newQuery = new URLSearchParams(searchParams.toString());
+    newQuery.set("page", page);
+
+    // 🔹 Se usa shallow para evitar recarga completa
+    router.push(`${pathname}?${newQuery.toString()}`, { shallow: true });
+  };
   return (
     <div className="w-full">
       <Script
@@ -112,3 +129,4 @@ const CategoriaPage = () => {
 };
 
 export default CategoriaPage;
+

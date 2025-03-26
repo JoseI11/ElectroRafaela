@@ -1,7 +1,8 @@
 import React from "react";
 import Image from "next/legacy/image";
 import Link from "next/link";
-import WhatsappButton from "../components/whatsappbutton";
+import WhatsappButton from "./whatsapp-button";
+import NotFound from "../not-found";
 /**
  * Realiza el renderizado de una lista de productos segun la categoria seleccionada previamente.
  
@@ -16,7 +17,7 @@ import WhatsappButton from "../components/whatsappbutton";
 const RenderProducts = ({ productos }) => {
   return (
     <div className="flex flex-col sm:grid sm:grid-cols-2 md:grid md:grid-cols-3 lg:grid lg:grid-cols-4 gap-4">
-      {productos.map((producto) => (
+      {productos===null? <NotFound /> : productos.map((producto) => (
         <div
           className=" flex w-full items-center  bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 sm:flex-col sm:w-40 md:flex-col md:w-44"
           key={producto.id}
@@ -32,12 +33,18 @@ const RenderProducts = ({ productos }) => {
               loading="lazy"
             />
           </Link> */}
-          <Link
+          {/* <Link
             href={`/products/${encodeURIComponent(
               producto.Categoría
             )}/product/${producto.ID}`}
             className="flex justify-center"
+          > */}
+
+          <Link
+            href={producto.Detalle_adicional} rel="noopener noreferrer"
+            className="flex justify-center"
           >
+          {console.log("URL del producto:", producto.Detalle_adicional)}
             <Image
               className="w-full h-28 object-cover rounded-t-lg"
               src={producto.Image}
@@ -45,7 +52,6 @@ const RenderProducts = ({ productos }) => {
               width={200}
               height={200}
               layout="intrinsic"
-
               loading="lazy"
             />
           </Link>

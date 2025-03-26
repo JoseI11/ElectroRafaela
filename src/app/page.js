@@ -1,6 +1,6 @@
 "use client";
 import BannerCarousel from "./components/banner";
-import { MuestraProductos } from "./components/showcategories";
+import { MuestraProductos } from "./components/show-categories";
 export default function Home() {
   return (
     <div className="flex flex-col items-center justify-items-center min-h-screen pb-20 gap-5 sm:p-1 bg-fondo overflow-hidden">

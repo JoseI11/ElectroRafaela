@@ -3,6 +3,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/legacy/image";
 
+
 /**
  * MuestraProductos es un componente que renderiza una serie de iconos 
  * representando diferentes categorías de productos. Cada icono actúa como 
@@ -45,7 +46,7 @@ export const MuestraProductos = () => {
       {imagenesIconos.map((imagen, index) => (
         <div key={index} className="flex flex-col items-center">
           <div className="bg-slate-300 rounded-full flex justify-center items-center w-28 h-28 sm:w-32 sm:h-32 md:w-44 md:h-44 lg:w-52 lg:h-52 m-4">
-          {console.log(imagen.url)}
+
             <Link href={imagen.url} className="transition-transform transform hover:scale-105 w-full h-full" prefetch={false}>
               <div className="relative w-full h-full bg-none">
                 <Image

@@ -3,9 +3,7 @@ import React from "react";
 import { useParams } from "next/navigation";
 import useProducts from "@/app/hooks/useProducts";
 import Image from "next/image";
-import WhatsappButton from "@/app/components/whatsappbutton";
-import { Button } from "flowbite-react";
-import ModalAccesories from "@/app/components/modal";
+import WhatsappButton from "@/app/components/whatsapp-button";
 import Loader from "@/app/components/loader";
 
 /**
@@ -35,7 +33,6 @@ const ProductPage = () => {
   return (
     <section>
       <div className="flex justify-center space-x-20 ">
-        {console.log(product.Image)}
         <Image
           src={product.Image}
           priority

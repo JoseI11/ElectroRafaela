@@ -15,7 +15,7 @@ import useProducts from "./useProducts"; // Importamos el hook
  * - lastProduct: The last product loaded, used for pagination purposes.
  */
 
-const usePaginate = ({ category, limit = 16 }) => {
+const usePaginate = ({ category, limit = 24 }) => {
   const [lastProduct, setLastProduct] = useState(null); // Último producto cargado
   const { productos, loading } = useProducts({ category, limit: limit });
 
