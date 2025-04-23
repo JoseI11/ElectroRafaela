@@ -40,6 +40,11 @@ export const MuestraProductos = () => {
       url: "/products/TERMICAS",
       text: "TERMICAS",
     },
+    {
+      src: "/assets/terminal.png",
+      url: "/products/TERMINALES",
+      text: "TERMINALES",
+    }
   ];
   return (
     <section className="flex flex-row flex-wrap justify-center items-center">
