@@ -1,10 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Electro Rafaela
 
-## Getting Started
+Electro Rafaela es una tienda web que muestra los diferentes productos eléctricos que ofrece la empresa, como térmicas, disyuntores y guardamotores. Los clientes pueden explorar el catálogo y contactarse directamente con la empresa a través de WhatsApp para adquirir los productos.
 
-First, run the development server:
+## 📌 Características
+- Catálogo de productos eléctricos con imágenes y descripciones.
+- Interfaz moderna y responsive.
+- Contacto directo con la empresa vía WhatsApp.
+- Almacenamiento de datos en **Firebase Realtime Database**.
 
-```bash
+## 🌟 Vista previa
+
+### Página principal
+![Captura de pantalla 2025-03-27 223655](https://github.com/user-attachments/assets/37eef036-5075-47fc-9127-1ed2fec2ae57)
+
+
+### Vista de productos
+
+![Captura de pantalla 2025-03-27 225030](https://github.com/user-attachments/assets/ed93f71a-04b3-4db3-aa75-6c687d676fd3)
+
+## 🚀 Instalación
+Asegúrate de tener **Node.js** instalado en tu sistema. Luego, sigue estos pasos:
+
+```sh
+git clone https://github.com/tu-usuario/electro-rafaela.git  
+cd electro-rafaela  
+npm install  
+npm run dev  
+```
+
+## 🚀 Primeros Pasos  
+
+Primero, inicia el servidor de desarrollo:
+
+```sh
 npm run dev
 # or
 yarn dev
@@ -14,23 +42,25 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver el resultado.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Puedes comenzar a editar la página modificando el archivo `app/page.js`. La página se actualiza automáticamente a medida que realizas cambios.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Este proyecto utiliza [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) para optimizar y cargar automáticamente [Geist](https://vercel.com/font), una nueva familia tipográfica de Vercel.
 
-## Learn More
+## 🌍 Desplegar en Vercel  
 
-To learn more about Next.js, take a look at the following resources:
+La forma más sencilla de desplegar tu aplicación Next.js es utilizando la [plataforma Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme), creada por los desarrolladores de Next.js.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Consulta la [documentación de despliegue de Next.js](https://nextjs.org/docs/app/building-your-application/deploying) para más detalles.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🛠️ Tecnologías utilizadas
+- **Next.js** (15.1.7)
+- **React** (19.0.0)
+- **TailwindCSS** (3.4.1)
+- **Firebase Realtime Database** (11.3.1)
+- **Flowbite & Flowbite-React** (3.1.2 / 0.10.2)
+- **Eslint & Configuración Next.js**
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📬 Contacto  
+Para dudas o mejoras o si necesita el .env para la base de datos , puedes escribirme a: **jose-imhoff@hotmail.com**
