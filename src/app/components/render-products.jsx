@@ -18,35 +18,19 @@ const RenderProducts = ({ productos }) => {
   return (
     <div className="flex flex-col sm:grid sm:grid-cols-2 md:grid md:grid-cols-3 lg:grid lg:grid-cols-4 gap-4">
       {productos===null? <NotFound /> : productos.map((producto) => (
+        
         <div
-          className=" flex w-full items-center  bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 sm:flex-col sm:w-40 md:flex-col md:w-44"
+          className=" flex w-full items-center  bg-slate-200 border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 sm:flex-col sm:w-40 md:flex-col md:w-44"
           key={producto.id}
         >
-          {/* <Link href={"/coming-soon"}>
-            <Image
-              className="w-full h-28 object-cover rounded-t-lg"
-              src={producto.Image}
-              alt={producto.Categoría}
-              width={200}
-              height={200}
-              layout="intrinsic"
-              loading="lazy"
-            />
-          </Link> */}
           {/* <Link
-            href={`/products/${encodeURIComponent(
-              producto.Categoría
-            )}/product/${producto.ID}`}
+            href={producto.Detalle_adicional.replace("/(\d+)$/",producto.Código)} rel="noopener noreferrer"
             className="flex justify-center"
           > */}
-
-          <Link
-            href={producto.Detalle_adicional} rel="noopener noreferrer"
-            className="flex justify-center"
-          >
-          {console.log("URL del producto:", producto.Detalle_adicional)}
+          
+          <Link href={producto.Detalle_adicional} rel="noopener noreferrer" className="flex justify-center">
             <Image
-              className="w-full h-28 object-cover rounded-t-lg"
+              className="w-full h-28 object-cover rounded-t-lg hover:scale-105 transition-transform duration-200"
               src={producto.Image}
               alt={producto.Categoría}
               width={200}
@@ -62,14 +46,14 @@ const RenderProducts = ({ productos }) => {
             >
               <h5
                 className="text-xs font-semibold tracking-tight p-0 text-gray-900 dark:text-white sm:text-sm line-clamp-2"
-                title={producto.Nombre}
+                title={producto.Nombre.toUpperCase()}
               >
-                {producto.Nombre}
+                {producto.Nombre.toUpperCase()}
               </h5>
             </a>
             <div className="flex items-center justify-center mt-2.5 mb-5">
               <p className="text-xs text-gray-900 dark:text-white sm:text-sm">
-                Código:
+                Código: 
               </p>
               <p className="text-xs font-semibold text-gray-900 dark:text-white sm:text-sm">
                 {producto.Código}

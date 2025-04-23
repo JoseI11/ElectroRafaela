@@ -2,22 +2,23 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import {useRouter,usePathname, useParams, useSearchParams } from "next/navigation";
 import dynamic from "next/dynamic";
-import useProducts from "@/app/hooks/useProducts";
-import useFilterProducts from "@/app/hooks/useFilterProducts";
-import Loader from "@/app/components/loader";
-import PaginateProducts from "@/app/components/paginate-products";
-import MyAccordion from "@/app/components/accordion";
+import useProducts from "../../hooks/useProducts"
+// import useProducts from "@/app/hooks/useProducts";
+import useFilterProducts from "../../hooks/useFilterProducts";
+import Loader from "../../components/loader";
+import PaginateProducts from "../../components/paginate-products";
+import MyAccordion from "../../components/accordion";
 import { FaFilter } from "react-icons/fa";
 
 import Script from "next/script";
 
 // Lazy load components
-const RenderProducts = dynamic(() => import("@/app/components/render-products"), {
+const RenderProducts = dynamic(() => import("../../components/render-products"), {
   loading: () => <Loader />,
   ssr: false,
 });
 
-const FilterCheck = dynamic(() => import("@/app/components/filter-check"), {
+const FilterCheck = dynamic(() => import("../../components/filter-check"), {
   ssr: false,
 });
 

@@ -11,8 +11,6 @@ export default function Home() {
             <BannerCarousel />
           </div>
         </div>
-
-        {/* Sección de productos */}
         <div className="w-full flex justify-center items-center ">
           <MuestraProductos />
         </div>
