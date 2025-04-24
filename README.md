@@ -63,4 +63,4 @@ Consulta la [documentación de despliegue de Next.js](https://nextjs.org/docs/ap
 - **Eslint & Configuración Next.js**
 
 ## 📬 Contacto  
-Para dudas o mejoras o si necesita el .env para la base de datos , puedes escribirme a: **jose-imhoff@hotmail.com**
+Para dudas o mejoras o si necesita el .env para la base de datos para pruebas(si necesitas permisos de escritura, ya que de lectura no existen inconvenientes) , puedes escribirme a: **jose-imhoff@hotmail.com**
