@@ -3,6 +3,7 @@ import Image from "next/legacy/image";
 import Link from "next/link";
 import WhatsappButton from "./whatsapp-button";
 import NotFound from "../not-found";
+import { useCart } from "../context/cart-context";
 /**
  * Realiza el renderizado de una lista de productos segun la categoria seleccionada previamente.
  
@@ -15,6 +16,7 @@ import NotFound from "../not-found";
  */
 
 const RenderProducts = ({ productos }) => {
+  const { addToCart } = useCart();
   return (
     <div className="flex flex-col sm:grid sm:grid-cols-2 md:grid md:grid-cols-3 lg:grid lg:grid-cols-4 gap-4">
       {productos===null? <NotFound /> : productos.map((producto) => (
@@ -53,6 +55,12 @@ const RenderProducts = ({ productos }) => {
               </p>
             </div>
             <WhatsappButton productName={producto.Nombre} productCode={producto.Código} />
+            <button
+              onClick={() => addToCart({ ...producto, price: producto.price || 100 })}
+              className="mt-2 w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors"
+            >
+              Añadir al Carrito
+            </button>
           </div>
         </Link>
       ))}

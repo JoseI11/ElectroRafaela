@@ -8,6 +8,7 @@ import BackToHome from "./components/back-to-home";
 import GridLayout from "./components/grid-layout";
 import Header from "./components/header";
 import Footer from "./components/footer";
+import { CartProvider } from "./context/cart-context";
 
 // import Path from "./components/path";
 
@@ -78,7 +79,11 @@ export default function RootLayout({ children }) {
       >
         <Header />
         <ScrollToTop />
-        <FlowbiteProvider>{children}</FlowbiteProvider>
+        <FlowbiteProvider>
+          <CartProvider>
+            {children}
+          </CartProvider>
+        </FlowbiteProvider>
         <Footer />
       </body>
     </html>
