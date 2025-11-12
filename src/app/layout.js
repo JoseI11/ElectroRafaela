@@ -6,6 +6,8 @@ import ScrollToTop from "./components/scroll-to-top";
 import FlowbiteProvider from "./components/flowbite-provider";
 import BackToHome from "./components/back-to-home";
 import GridLayout from "./components/grid-layout";
+import Header from "./components/header";
+import Footer from "./components/footer";
 
 // import Path from "./components/path";
 
@@ -20,10 +22,51 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Electro Rafaela",
-  description: "Catalogo de productos de venta",
+  title: {
+    default: "Electro Rafaela | Catálogo de Productos Eléctricos",
+    template: "%s | Electro Rafaela",
+  },
+  description: "Catálogo completo de productos eléctricos de Electro Rafaela. Encuentra contactores, guardamotores, disyuntores, térmicas, terminales y más. Calidad y precio en un solo lugar.",
+  keywords: [
+    "Electro Rafaela",
+    "productos eléctricos",
+    "contactores",
+    "guardamotores",
+    "disyuntores",
+    "térmicas",
+    "terminales",
+    "materiales eléctricos",
+    "ventas eléctricas",
+    "Rafaela",
+    "electricidad",
+    "componentes eléctricos",
+  ],
+  metadataBase: new URL('https://www.electrorafaela.com.ar'), // Reemplaza con tu URL real
+  openGraph: {
+    title: "Electro Rafaela | Catálogo de Productos Eléctricos",
+    description: "Catálogo completo de productos eléctricos de Electro Rafaela. Encuentra contactores, guardamotores, disyuntores, térmicas, terminales y más. Calidad y precio en un solo lugar.",
+    url: "https://www.electrorafaela.com.ar", // Reemplaza con tu URL real
+    siteName: "Electro Rafaela",
+    images: [
+      {
+        url: "/assets/Schneider-Electric-Logo.webp", // Usa una imagen relevante para Open Graph
+        width: 1536,
+        height: 864,
+        alt: "Logo de Electro Rafaela",
+      },
+    ],
+    locale: "es_AR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Electro Rafaela | Catálogo de Productos Eléctricos",
+    description: "Catálogo completo de productos eléctricos de Electro Rafaela. Encuentra contactores, guardamotores, disyuntores, térmicas, terminales y más. Calidad y precio en un solo lugar.",
+    creator: "@ElectroRafaela", // Reemplaza con tu usuario de Twitter si tienes uno
+    images: ["/assets/Schneider-Electric-Logo.webp"], // Misma imagen que Open Graph
+  },
   icons: {
-    icon: "../assets/logo.ico",
+    icon: "/assets/logo.ico",
   },
 };
 
@@ -33,16 +76,10 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-fondo `}
       >
-        <GridLayout>
-          <div className="flex justify-center items-center w-32 space-y-3 sm:w-44 md:w-48">
-            <BackToHome />
-          </div>
-          <div className="flex justify-center items-center ">
-            <Image alt="logo" src={logo} height={100} priority />
-          </div>
-        </GridLayout>
+        <Header />
         <ScrollToTop />
         <FlowbiteProvider>{children}</FlowbiteProvider>
+        <Footer />
       </body>
     </html>
   );

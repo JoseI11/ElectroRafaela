@@ -62,8 +62,8 @@ const FilterCheck = () => {
           >
             <div className="flex max-w-md flex-col gap-4" id="checkbox">
               <div className="flex items-center gap-2">
-                <Checkbox id={polo.id} name={polo.name} value={polo.name} className="w-4 h-4 border-zinc-900" onChange={handleFilterChange}  />
-                <Label htmlFor="accept" className="flex">
+                <Checkbox id={polo.id} name={polo.name} value={polo.name} className="w-4 h-4 border-zinc-900 bg-white dark:bg-gray-700 checked:bg-primary-DEFAULT" onChange={handleFilterChange}  />
+                <Label htmlFor={polo.id} className="flex">
                   {polo.name}
                 </Label>
               </div>

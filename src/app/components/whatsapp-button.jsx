@@ -5,9 +5,11 @@ import React from 'react'
  *
  * @returns Un JSXElement con un botón que abre una ventana de WhatsApp
  */
-const WhatsappButton = () => {
+const WhatsappButton = ({ productName, productCode }) => {
    const phoneNumber = process.env.NEXT_PUBLIC_PHONE_NUMBER; // Reemplaza con tu número real
-    const message = encodeURIComponent("Hola, quiero más información"); // Mensaje codificado
+    const baseMessage = "Hola, me interesa el producto";
+    const productInfo = productName && productCode ? ` ${productName} (Código: ${productCode})` : "";
+    const message = encodeURIComponent(`${baseMessage}${productInfo}. ¿Podrías darme más información?`);
     const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${message}`;
     return (
       <div className='flex justify-center items-center text-center'>
