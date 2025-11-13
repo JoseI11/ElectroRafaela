@@ -85,7 +85,7 @@ const CategoriaPage = () => {
     router.push(`${pathname}?${newQuery.toString()}`, { shallow: true });
   };
   return (
-    <div className="w-full">
+    <div className="w-full pt-20 overflow-hidden">
       <Script
         rel="preconnect"
         href="https://fonts.googleapis.com"
@@ -97,7 +97,7 @@ const CategoriaPage = () => {
         crossOrigin="true"
         strategy="lazyOnload"
       />
-      <section className="grid grid-cols-[auto,1fr] gap-4 pl-1 pr-1">
+      <section className="flex flex-col sm:grid sm:grid-cols-[auto,1fr] gap-4 pl-1 pr-1">
         <div className="w-32 space-y-3 sm:w-44 md:w-48">
           <div className="relative">
             <FaFilter className="absolute left-2 top-2.5 text-gray-500" />

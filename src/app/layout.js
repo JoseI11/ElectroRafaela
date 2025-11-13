@@ -75,13 +75,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-fondo `}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-fondo flex flex-col min-h-screen`}
       >
-        <Header />
-        <ScrollToTop />
         <FlowbiteProvider>
           <CartProvider>
-            {children}
+            <Header />
+            <ScrollToTop />
+            <div className="flex-grow">{children}</div>
           </CartProvider>
         </FlowbiteProvider>
         <Footer />

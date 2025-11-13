@@ -54,7 +54,7 @@ const FilterCheck = () => {
 
   return (
     <section className="flex flex-col items-center">
-      <div className="flex flex-col space-y-2 w-full max-w-xs">
+      <div className="flex flex-col space-y-2 w-full">
         {polos.map((polo) => (
           <div
             key={polo.id}
@@ -63,7 +63,7 @@ const FilterCheck = () => {
             <div className="flex max-w-md flex-col gap-4" id="checkbox">
               <div className="flex items-center gap-2">
                 <Checkbox id={polo.id} name={polo.name} value={polo.name} className="w-4 h-4 border-zinc-900 bg-white dark:bg-gray-700 checked:bg-primary-DEFAULT" onChange={handleFilterChange}  />
-                <Label htmlFor={polo.id} className="flex">
+                <Label htmlFor={polo.id} className="flex !text-gray-900">
                   {polo.name}
                 </Label>
               </div>

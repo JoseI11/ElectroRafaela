@@ -11,8 +11,8 @@ const MyAccordion = ({children,title}) => {
     <div>
      <Accordion collapseAll>
       <Accordion.Panel>
-        <Accordion.Title className="h-6 flex items-center justify-center bg-title text-white  hover:bg-red-300" >{title}</Accordion.Title>
-        <Accordion.Content className="pt-6 pr-2 h-40">
+        <Accordion.Title className="flex items-center justify-center bg-title text-gray-900 flex-wrap text-center" >{title}</Accordion.Title>
+        <Accordion.Content className="pt-6 pr-2 h-auto max-h-60 overflow-y-auto">
          {children}
         </Accordion.Content>
       </Accordion.Panel>

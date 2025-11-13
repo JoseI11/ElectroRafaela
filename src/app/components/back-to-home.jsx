@@ -12,10 +12,10 @@ const BackToHome = () => {
       {pathname !== "/" ? (
         <Link
           href="/"
-          className=" text-black px-4 py-2 rounded-lg border-blue-600  hover:bg-blue-400 flex items-center"
+          className="text-black px-4 py-2 rounded-lg border-blue-600 hover:bg-blue-400 flex items-center"
         >
-        
-          <ArrowCircleLeft/> Volver al inicio
+          <ArrowCircleLeft/> 
+          <span className="hidden sm:inline">Volver al inicio</span>
         </Link>
       ) : null}
     </>
