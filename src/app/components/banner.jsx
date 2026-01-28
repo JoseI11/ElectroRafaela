@@ -21,7 +21,7 @@ export default function BannerCarousel() {
       <div
         className="flex transition-transform duration-700 ease-in-out w-screen items-center justify-center"
       >
-          <Image src={logoSchneider} width={600} height={200}></Image>
+          <Image src={logoSchneider} width={600} height={200} alt="Logo Schneider Electric" />
       </div>
 
     
