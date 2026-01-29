@@ -16,7 +16,7 @@ const Header = () => {
             height={50}
             className="mr-2"
           />
-          <span className="text-xl font-bold text-gray-800">Electro Rafaela</span>
+          <span className="sr-only">Electro Rafaela</span>
         </Link>
         <nav className="hidden md:flex space-x-6">
           <Link href="/" className="text-gray-700 hover:text-blue-600 transition-colors">
