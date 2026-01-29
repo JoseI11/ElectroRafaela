@@ -1,73 +1,116 @@
-import React from "react";
-import Image from "next/legacy/image";
+import React, { memo, useCallback } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import WhatsappButton from "./whatsapp-button";
 import NotFound from "../not-found";
 import { useCart } from "../context/cart-context";
-/**
- * Realiza el renderizado de una lista de productos segun la categoria seleccionada previamente.
- 
- *
- * @param {Array} productos - An array of product objects. Each object should
- * contain the properties 'id', 'Image', 'Categoría', 'Nombre', and 'Código'.
- *
- * @returns {JSX.Element} A JSX component rendering a responsive grid of products,
- * each with an image, product name, product code, and a Whatsapp button.
- */
 
-const RenderProducts = ({ productos }) => {
-  const { addToCart } = useCart();
+/**
+ * ProductCard - Card individual de producto memoizado
+ * Se memoiza para evitar re-renders cuando props del padre cambian
+ */
+const ProductCard = memo(({ producto, onAddToCart }) => {
   return (
-    <div className="flex flex-col sm:grid sm:grid-cols-2 md:grid md:grid-cols-3 lg:grid lg:grid-cols-4 gap-4">
-      {productos===null? <NotFound /> : productos.map((producto) => (
-        
-        <div
-          className="flex w-full items-center bg-white border border-gray-200 rounded-lg shadow-lg dark:bg-gray-800 dark:border-gray-700 sm:flex-col sm:w-40 md:flex-col md:w-44"
-          key={producto.id}
-        >
-          {/* Este Link envolverá la imagen y la información principal del producto */}
-          <Link href={producto.Detalle_adicional} rel="noopener noreferrer" className="flex flex-col items-center w-full">
-            <div className="flex justify-center w-full">
-              <Image
-                className="w-full h-28 object-cover rounded-t-lg hover:scale-105 transition-transform duration-200"
-                src={producto.Image}
-                alt={producto.Nombre}
-                width={200}
-                height={200}
-                layout="intrinsic"
-                loading="lazy"
-              />
-            </div>
-            <div className="px-5 pb-2 w-full">
-              <div className="flex justify-center items-center w-full text-center">
-                <h5
-                  className="text-xs font-semibold tracking-tight p-0 text-gray-900 dark:text-gray-100 sm:text-sm line-clamp-2"
-                  title={producto.Nombre.toUpperCase()}
-                >
-                  {producto.Nombre.toUpperCase()}
-                </h5>
-              </div>
-              <div className="flex items-center justify-center mt-2.5 mb-2">
-                <p className="text-xs text-gray-900 dark:text-gray-100 sm:text-sm">
-                  Código: {producto.Código}
-                </p>
-              </div>
-            </div>
-          </Link>
-          {/* Los botones de acción estarán fuera del Link, pero dentro de la tarjeta */}
-          <div className="px-5 pb-5 w-full flex flex-col items-center">
-            <WhatsappButton productName={producto.Nombre} productCode={producto.Código} />
-            <button
-              onClick={() => addToCart({ ...producto, price: producto.price || 100 })}
-              className="mt-2 w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors"
-            >
-              Añadir al Carrito
-            </button>
-          </div>
+    <div className="group flex flex-col h-full bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden focus-within:ring-2 focus-within:ring-blue-500 focus-within:ring-offset-2">
+      {/* Imagen con altura fija y overlay */}
+      <Link
+        href={producto.Detalle_adicional}
+        rel="noopener noreferrer"
+        className="relative overflow-hidden bg-slate-100 flex-shrink-0 h-48 sm:h-52"
+      >
+        <Image
+          src={producto.Image}
+          alt={producto.Nombre}
+          fill
+          className="object-cover group-hover:scale-105 transition-transform duration-300"
+          loading="lazy"
+        />
+        {/* Badge de categoría */}
+        <div className="absolute top-3 right-3 bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
+          {producto.Código}
         </div>
-      ))}
+      </Link>
+
+      {/* Contenido de la card */}
+      <div className="flex flex-col flex-grow p-4">
+        {/* Título */}
+        <Link
+          href={producto.Detalle_adicional}
+          rel="noopener noreferrer"
+          className="group/title"
+        >
+          <h3 className="font-bold text-sm leading-tight text-slate-900 mb-2 line-clamp-2 group-hover/title:text-blue-600 transition-colors">
+            {producto.Nombre.toUpperCase()}
+          </h3>
+        </Link>
+
+        {/* Info secundaria */}
+        <p className="text-xs text-slate-600 mb-4 font-medium">
+          Código: <span className="text-slate-900 font-semibold">{producto.Código}</span>
+        </p>
+
+        {/* Spacer flexible */}
+        <div className="flex-grow" />
+
+        {/* CTAs */}
+        <div className="flex flex-col gap-2 pt-4 border-t border-slate-100">
+          <button
+            onClick={() =>
+              onAddToCart({ ...producto, price: producto.price || 100 })
+            }
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 px-4 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 text-sm"
+            title="Agregar al carrito"
+          >
+            Agregar al Carrito
+          </button>
+
+          <WhatsappButton
+            productName={producto.Nombre}
+            productCode={producto.Código}
+          />
+        </div>
+      </div>
     </div>
   );
-};
+});
+
+ProductCard.displayName = "ProductCard";
+
+/**
+ * RenderProducts - Grid de productos tipo e-commerce moderno
+ * Optimizado con memo y useCallback para evitar re-renders innecesarios
+ */
+const RenderProducts = memo(({ productos }) => {
+  const { addToCart } = useCart();
+
+  // useCallback para memoizar la función - se crea solo una vez
+  const handleAddToCart = useCallback(
+    (product) => {
+      addToCart(product);
+    },
+    [addToCart]
+  );
+
+  if (productos === null || productos.length === 0) {
+    return <NotFound />;
+  }
+
+  return (
+    <div className="w-full">
+      {/* Grid responsivo: 1 col mobile, 2 tablet, 3 desktop md, 4 xl */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full">
+        {productos.map((producto) => (
+          <ProductCard
+            key={producto.id}
+            producto={producto}
+            onAddToCart={handleAddToCart}
+          />
+        ))}
+      </div>
+    </div>
+  );
+});
+
+RenderProducts.displayName = "RenderProducts";
 
 export default RenderProducts;
