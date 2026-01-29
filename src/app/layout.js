@@ -8,6 +8,7 @@ import BackToHome from "./components/back-to-home";
 import GridLayout from "./components/grid-layout";
 import Header from "./components/header";
 import Footer from "./components/footer";
+import BackgroundImage from "./components/background-image";
 import { CartProvider } from "./context/cart-context";
 
 // import Path from "./components/path";
@@ -75,8 +76,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-fondo flex flex-col min-h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
       >
+        <BackgroundImage />
         <FlowbiteProvider>
           <CartProvider>
             <Header />

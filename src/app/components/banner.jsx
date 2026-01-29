@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 import logoSchneider from "../../../public/assets/Schneider-Electric-Logo.webp";
 
@@ -17,11 +17,17 @@ import logoSchneider from "../../../public/assets/Schneider-Electric-Logo.webp";
 export default function BannerCarousel() {
   return (
     <div className="relative w-screen h-auto overflow-hidden">
-      
+      <h1 className="sr-only">Electro Rafaela - Catálogo de Productos Eléctricos</h1>
       <div
         className="flex transition-transform duration-700 ease-in-out w-screen items-center justify-center"
       >
-          <Image src={logoSchneider} width={600} height={200} alt="Logo Schneider Electric" />
+          <Image 
+            src={logoSchneider} 
+            width={600} 
+            height={200} 
+            alt="Logo Schneider Electric"
+            priority
+          />
       </div>
 
     

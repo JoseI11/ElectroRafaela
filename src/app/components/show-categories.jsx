@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 
 /**
@@ -52,12 +52,11 @@ export const MuestraProductos = () => {
         <div key={index} className="flex flex-col items-center">
           <div className="bg-white rounded-full flex justify-center items-center w-28 h-28 sm:w-32 sm:h-32 md:w-44 md:h-44 lg:w-52 lg:h-52 m-4 shadow-md">
 
-            <Link href={imagen.url} className="transition-transform transform hover:scale-105 w-full h-full" prefetch={false}>
-              <div className="relative w-full h-full bg-none">
+            <Link href={imagen.url} className="transition-transform transform hover:scale-105 w-full h-full flex items-center justify-center" prefetch={false}>
+              <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
                 <Image
                   src={imagen.src}
                   alt={imagen.text}
-                  layout="responsive"
                   width={128}
                   height={128}
                   className="object-contain"

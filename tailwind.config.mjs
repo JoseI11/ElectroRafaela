@@ -13,9 +13,6 @@ export default {
 
   theme: {
     extend: {
-      backgroundImage: {
-        fondo:"url('/assets/imagenconstelacion.jpg')",
-      },
       fontFamily: {
         custom: ["Nunito", "sans-serif"],
       },    
