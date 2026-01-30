@@ -1,14 +1,15 @@
 "use client";
-import React, { useState, useEffect, useRef, useMemo } from "react";
+import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import {useRouter,usePathname, useParams, useSearchParams } from "next/navigation";
 import dynamic from "next/dynamic";
 import useProducts from "../../hooks/useProducts"
-// import useProducts from "@/app/hooks/useProducts";
 import useFilterProducts from "../../hooks/useFilterProducts";
 import Loader from "../../components/loader";
 import PaginateProducts from "../../components/paginate-products";
 import MyAccordion from "../../components/accordion";
-import { FaFilter } from "react-icons/fa";
+import ProductsHero from "../../components/products-hero";
+import FilterChips from "../../components/filter-chips";
+import { FaSearch } from "react-icons/fa";
 
 import Script from "next/script";
 
@@ -64,15 +65,10 @@ const CategoriaPage = () => {
   const endIndex = useMemo(() => startIndex + itemsPerPage, [startIndex, itemsPerPage]);
   const currentProducts = useMemo(() => filteredProductos.slice(startIndex, endIndex), [filteredProductos, startIndex, endIndex]);
 
-  if (loading) {
-    return <Loader />;
-  }
-
-  // const handlePageChange = (page) => {
-  //   setCurrentPage(page);
-  //   isPaginationChange.current = true;
-  // };
-  const handlePageChange = (page) => {
+  // useCallback para evitar que handlePageChange se recree en cada render
+  // Esto previene re-renders innecesarios de PaginateProducts
+  // NOTA: Debe estar antes de cualquier return statement
+  const handlePageChange = useCallback((page) => {
     if (page < 1 || page > totalPages) return;
 
     setCurrentPage(page);
@@ -81,49 +77,83 @@ const CategoriaPage = () => {
     const newQuery = new URLSearchParams(searchParams.toString());
     newQuery.set("page", page);
 
-    // 🔹 Se usa shallow para evitar recarga completa
     router.push(`${pathname}?${newQuery.toString()}`, { shallow: true });
-  };
+  }, [totalPages, searchParams, pathname, router]);
+
+  // useCallback para handleSearchChange
+  const handleSearchChange = useCallback((e) => {
+    setSearchText(e.target.value);
+    // Reset a página 1 cuando se busca
+    setCurrentPage(1);
+  }, []);
+
+  if (loading) {
+    return <Loader />;
+  }
   return (
-    <div className="w-full pt-20 overflow-hidden">
-      <Script
-        rel="preconnect"
-        href="https://fonts.googleapis.com"
-        strategy="lazyOnload"
-      />
-      <Script
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossOrigin="true"
-        strategy="lazyOnload"
-      />
-      <section className="flex flex-col sm:grid sm:grid-cols-[auto,1fr] gap-4 pl-1 pr-1">
-        <div className="w-32 space-y-3 sm:w-44 md:w-48">
-          <div className="relative">
-            <FaFilter className="absolute left-2 top-2.5 text-gray-500" />
-            <input
-              type="search"
-              onChange={(e) => setSearchText(e.target.value)}
-              className="w-32 h-8 pl-8 text-sm sm:w-44 sm:text-base md:w-48 placeholder:text-xs placeholder:sm:text-sm"
-              placeholder="Buscar"
-              title="Buscar por nombre o código"
-            />
+    <div className="w-full min-h-screen bg-white">
+      {/* Hero Section */}
+      <ProductsHero category={category} />
+
+      {/* Main Content */}
+      <div className="container mx-auto px-4 md:px-8 py-12">
+        <Script
+          rel="preconnect"
+          href="https://fonts.googleapis.com"
+          strategy="lazyOnload"
+        />
+        <Script
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="true"
+          strategy="lazyOnload"
+        />
+
+        {/* Filtros Sección */}
+        <div className="mb-10">
+          {/* Barra de búsqueda */}
+          <div className="mb-6">
+            <div className="relative max-w-md">
+              <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400" />
+              <input
+                type="search"
+                onChange={handleSearchChange}
+                className="w-full pl-12 pr-4 py-3 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder:text-slate-500 shadow-sm"
+                placeholder="Buscar por nombre o código..."
+                title="Buscar productos por nombre o código"
+              />
+            </div>
           </div>
 
+          {/* Filtros por polos (solo para TERMICAS y DISYUNTORES) */}
           {(category === "TERMICAS" || category === "DISYUNTORES") && (
-            <MyAccordion title="Tipos de polos">
-              <FilterCheck productos={currentProducts} />
-            </MyAccordion>
+            <div className="mb-6">
+              <details className="group">
+                <summary className="cursor-pointer flex items-center gap-2 font-semibold text-slate-900 hover:text-blue-600 transition-colors py-2">
+                  <span className="group-open:rotate-180 transition-transform">▶</span>
+                  Filtrar por Polos
+                </summary>
+                <div className="mt-4 pl-4 border-l-2 border-slate-200">
+                  <FilterCheck productos={currentProducts} />
+                </div>
+              </details>
+            </div>
           )}
         </div>
-        <RenderProducts productos={currentProducts} lazy={true} />
-      </section>
-      <div className="flex flex-col justify-center items-center">
-        <PaginateProducts
-          totalPages={totalPages}
-          setCurrentPage={handlePageChange}
-          currentPage={currentPage}
-        />
+
+        {/* Productos Grid */}
+        <div className="mb-12">
+          <RenderProducts productos={currentProducts} lazy={true} />
+        </div>
+
+        {/* Paginación */}
+        <div className="flex justify-center">
+          <PaginateProducts
+            totalPages={totalPages}
+            setCurrentPage={handlePageChange}
+            currentPage={currentPage}
+          />
+        </div>
       </div>
     </div>
   );
